@@ -1,0 +1,101 @@
+﻿<Window x:Class="Hierarchie22.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:self="clr-namespace:Hierarchie22"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hierarchie22"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Directory auswählen">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Datei:" Margin="5"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="Datei" Margin="5" IsReadOnly="True"/>
+                    <Button Grid.Row="0" Grid.Column="2" Content="..." Width="20" 
+                Margin="5" Click="Button_Click"/>
+                    <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="Dateiliste"                                     
+                     Margin="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Hierarchy anzeigen">
+                <Grid>
+                    <TextBox x:Name="Ausgabe1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Joined Files">
+                <Grid>
+                    <TextBox x:Name="Ausgabe2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="no comments">
+                <Grid>
+                    <TextBox x:Name="Ausgabe3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="xxx C# classes,methods">
+                <Grid>
+                    <TextBox x:Name="Ausgabe4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="TreeView">
+                <DockPanel Margin="10">
+                    <WrapPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                        <TextBox x:Name="Ausgabe5" Margin="5" />
+                    </WrapPanel>
+                    <TreeView Name="trvMenu" SelectedItemChanged="trvMenu_SelectedItemChanged">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate  ItemsSource="{Binding Items}">
+                                <TextBlock Text="{Binding MTitle}" />
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                                <Setter Property="IsExpanded" Value="{Binding IsExpanded}" />
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Test Tree">
+                <DockPanel Margin="10">
+                    <WrapPanel Margin="0,10,0,0" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                        <Button Name="btnSelectNext" Click="btnSelectNext_Click" Width="120">Select next</Button>
+                        <Button Name="btnToggleExpansion" Click="btnToggleExpansion_Click" Width="120" Margin="10,0,0,0">Toggle expansion</Button>
+                    </WrapPanel>
+                    
+                    <TreeView Name="trvPersons">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Name}" Margin="0,0,4,0" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded}" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                </TreeView>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
